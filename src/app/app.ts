@@ -6,6 +6,7 @@ import { LOGO_SRC } from './shared/logo';
 import { SurveyComponent } from './survey/survey';
 import { SurveyFlowService } from './survey/survey-flow.service';
 import { ThanksScreenComponent } from './thanks-screen/thanks-screen';
+import { WelcomeFormComponent } from './welcome-form/welcome-form';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { ThanksScreenComponent } from './thanks-screen/thanks-screen';
     ReferralScreenComponent,
     SurveyComponent,
     ThanksScreenComponent,
+    WelcomeFormComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -36,7 +38,7 @@ export class App {
   );
 
   onUnlocked(): void {
-    this.flow.iniciarPesquisa();
+    this.flow.mostrarIdentificacao();
   }
 
   startLogoPress(): void {

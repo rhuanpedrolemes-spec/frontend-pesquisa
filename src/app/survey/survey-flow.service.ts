@@ -13,7 +13,7 @@ export type ScreenId =
   | 'oferta'
   | 'oferta_confirmacao';
 
-export type Stage = 'lock' | 'survey' | 'referral' | 'thanks';
+export type Stage = 'lock' | 'identificacao' | 'survey' | 'referral' | 'thanks';
 
 export function computeFlow(a: Resposta): ScreenId[] {
   const flow: ScreenId[] = ['atendimento', 'assinante'];
@@ -80,9 +80,18 @@ export class SurveyFlowService {
     });
   }
 
+  mostrarIdentificacao(): void {
+    this.animKey.update((k) => k + 1);
+    this.stage.set('identificacao');
+  }
+
   iniciarPesquisa(): void {
     this.animKey.update((k) => k + 1);
     this.stage.set('survey');
+  }
+
+  atualizarCliente(patch: Partial<Pick<Resposta, 'clienteNome' | 'clienteWhatsapp'>>): void {
+    this.answers.update((prev) => ({ ...prev, ...patch }));
   }
 
   atualizarComentario(comentario: string): void {

@@ -39,8 +39,11 @@
             @case ('thanks') {
               <app-thanks-screen />
             }
-            @default {
+            @case ('survey') {
               <app-survey />
+            }
+            @default {
+              <app-welcome-form />
             }
           }
         </div>

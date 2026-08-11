@@ -8,6 +8,8 @@ export type Objecao =
 export type InteressePlano = 'Sim' | 'Não';
 
 export interface Resposta {
+  clienteNome: string;
+  clienteWhatsapp: string;
   notaAtendimento: number | null;
   assinante: boolean | null;
   satisfacaoAssinatura: number | null;
@@ -32,6 +34,8 @@ export interface ResumoRespostas {
 }
 
 export const RESPOSTA_VAZIA: Resposta = {
+  clienteNome: '',
+  clienteWhatsapp: '',
   notaAtendimento: null,
   assinante: null,
   satisfacaoAssinatura: null,

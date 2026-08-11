@@ -26,6 +26,14 @@
     <div class="admin-list">
       @for (r of respostas; track r._id) {
         <div class="admin-card">
+          @if (r.clienteNome) {
+            <div class="admin-card-cliente">
+              <span class="admin-card-cliente-nome">{{ r.clienteNome }}</span>
+              @if (r.clienteWhatsapp) {
+                <span class="admin-card-cliente-whatsapp">{{ r.clienteWhatsapp }}</span>
+              }
+            </div>
+          }
           <div class="admin-card-top">
             <span class="admin-card-date">{{ r.criadoEm ? formatarData(r.criadoEm) : '' }}</span>
             <span class="admin-card-badge" [attr.data-type]="r.assinante ? 'assinante' : 'novo'">

@@ -657,6 +657,21 @@ textarea {
   border-radius: 16px;
   padding: 14px 16px;
 }
+.admin-card-cliente {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+.admin-card-cliente-nome {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+.admin-card-cliente-whatsapp {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
 .admin-card-top {
   display: flex;
   align-items: center;
