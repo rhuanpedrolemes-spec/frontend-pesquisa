@@ -1,0 +1,19 @@
+<div class="pin-wrap">
+  <p class="pin-label">Digite o PIN de acesso</p>
+  <div class="pin-dots">
+    @for (i of dots; track i) {
+      <span class="pin-dot" [class.pin-dot-filled]="i < value.length" [class.pin-dot-error]="error"></span>
+    }
+  </div>
+  <div class="pin-grid">
+    @for (k of keys; track $index) {
+      @if (k === '') {
+        <div></div>
+      } @else if (k === 'del') {
+        <button type="button" class="pin-key pin-key-del" (click)="onKeyPress(k)">⌫</button>
+      } @else {
+        <button type="button" class="pin-key" (click)="onKeyPress(k)">{{ k }}</button>
+      }
+    }
+  </div>
+</div>

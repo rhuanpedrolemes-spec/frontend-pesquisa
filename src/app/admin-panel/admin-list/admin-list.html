@@ -1,0 +1,81 @@
+@if (loading) {
+  <p class="admin-empty">Carregando respostas...</p>
+} @else if (!respostas || respostas.length === 0) {
+  <p class="admin-empty">Nenhuma resposta ainda.</p>
+} @else {
+  <div class="admin-list-wrap">
+    <div class="admin-summary">
+      <div class="admin-summary-item">
+        <span class="admin-summary-num">{{ resumo?.total ?? respostas.length }}</span>
+        <span class="admin-summary-label">Respostas</span>
+      </div>
+      @if (mediaAtendimentoFormatada) {
+        <div class="admin-summary-item">
+          <span class="admin-summary-num">{{ mediaAtendimentoFormatada }}</span>
+          <span class="admin-summary-label">Média atend.</span>
+        </div>
+      }
+      @if (mediaGeralFormatada) {
+        <div class="admin-summary-item">
+          <span class="admin-summary-num">{{ mediaGeralFormatada }}</span>
+          <span class="admin-summary-label">Média geral</span>
+        </div>
+      }
+    </div>
+
+    <div class="admin-list">
+      @for (r of respostas; track r._id) {
+        <div class="admin-card">
+          <div class="admin-card-top">
+            <span class="admin-card-date">{{ r.criadoEm ? formatarData(r.criadoEm) : '' }}</span>
+            <span class="admin-card-badge" [attr.data-type]="r.assinante ? 'assinante' : 'novo'">
+              {{ r.assinante ? 'Assinante' : 'Não assinante' }}
+            </span>
+          </div>
+
+          <div class="admin-card-scores">
+            @if (r.notaAtendimento != null) {
+              @let atendimento = faceFor(r.notaAtendimento);
+              <div class="score-chip" [style.border-color]="atendimento.color" [style.color]="atendimento.color">
+                <span class="score-chip-value">{{ r.notaAtendimento }}</span>
+                <span class="score-chip-label">Atendimento</span>
+              </div>
+            }
+            @if (r.satisfacaoAssinatura != null) {
+              @let assinatura = faceFor(r.satisfacaoAssinatura);
+              <div class="score-chip" [style.border-color]="assinatura.color" [style.color]="assinatura.color">
+                <span class="score-chip-value">{{ r.satisfacaoAssinatura }}</span>
+                <span class="score-chip-label">Assinatura</span>
+              </div>
+            }
+            @if (r.satisfacaoGeral != null) {
+              @let geral = faceFor(r.satisfacaoGeral);
+              <div class="score-chip" [style.border-color]="geral.color" [style.color]="geral.color">
+                <span class="score-chip-value">{{ r.satisfacaoGeral }}</span>
+                <span class="score-chip-label">Geral</span>
+              </div>
+            }
+          </div>
+
+          @if (r.frequenciaCorte) {
+            <p class="admin-card-line"><b>Frequência:</b> {{ r.frequenciaCorte }}</p>
+          }
+          @if (r.objecao) {
+            <p class="admin-card-line"><b>Objeção:</b> {{ r.objecao }}</p>
+          }
+          @if (r.interessePlano) {
+            <p class="admin-card-line"><b>Interesse no plano:</b> {{ r.interessePlano }}</p>
+          }
+          @if (r.comentario) {
+            <p class="admin-card-line"><b>Comentário:</b> {{ r.comentario }}</p>
+          }
+          @if (r.indicacaoNome) {
+            <p class="admin-card-line">
+              <b>Indicação:</b> {{ r.indicacaoNome }}{{ r.indicacaoWhatsapp ? ' — ' + r.indicacaoWhatsapp : '' }}
+            </p>
+          }
+        </div>
+      }
+    </div>
+  </div>
+}

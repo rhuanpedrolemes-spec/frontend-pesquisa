@@ -1,0 +1,26 @@
+<div>
+  <div class="grid grid-cols-5 gap-2">
+    @for (n of nums; track n) {
+      @let stage = faceFor(n);
+      <button
+        type="button"
+        class="face-cell"
+        [style.background]="cellBackground(n, stage.color)"
+        [style.border-color]="cellBorderColor(n, stage.color)"
+        (click)="onSelect(n)"
+      >
+        <app-face-icon [kind]="stage.kind" [color]="stage.color" [selected]="value === n" [size]="24" />
+        <span
+          class="scale-num"
+          [style.color]="stage.color"
+          [style.font-weight]="value === n ? 800 : 600"
+          [style.opacity]="value === n ? 1 : 0.85"
+        >{{ n }}</span>
+      </button>
+    }
+  </div>
+  <div class="flex justify-between mt-3 px-1">
+    <span class="scale-label">Insatisfeito</span>
+    <span class="scale-label">Satisfeito</span>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RespostaSalva, ResumoRespostas } from '../../models/resposta.model';
+import { faceFor } from '../../shared/face-scale.util';
+
+@Component({
+  selector: 'app-admin-list',
+  standalone: true,
+  templateUrl: './admin-list.html',
+  styleUrl: './admin-list.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AdminListComponent {
+  @Input() loading = false;
+  @Input() resumo: ResumoRespostas | null = null;
+  @Input() respostas: RespostaSalva[] | null = null;
+
+  readonly faceFor = faceFor;
+
+  get mediaAtendimentoFormatada(): string | null {
+    const media = this.resumo?.mediaNotaAtendimento;
+    return media != null ? media.toFixed(1) : null;
+  }
+
+  get mediaGeralFormatada(): string | null {
+    const media = this.resumo?.mediaSatisfacaoGeral;
+    return media != null ? media.toFixed(1) : null;
+  }
+
+  formatarData(criadoEm: string): string {
+    return new Date(criadoEm).toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+}

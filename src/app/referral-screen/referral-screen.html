@@ -1,0 +1,29 @@
+<div class="offer-icon">
+  <app-icon name="gift" [size]="20" [strokeWidth]="2.2" />
+</div>
+<h1 class="question text-center">Que tal ganhar 50% de desconto?</h1>
+<p class="offer-text text-center">
+  Indique um amigo para conhecer o Boleiro. Se nossa equipe entrar em contato com ele e ele
+  fechar um plano, você ganha 50% de desconto na sua próxima mensalidade.
+</p>
+
+<div class="flex flex-col gap-3 w-full mt-6">
+  <input
+    class="text-input"
+    placeholder="Nome do amigo"
+    [ngModel]="flow.answers().indicacaoNome"
+    (ngModelChange)="onNomeChange($event)"
+  />
+  <input
+    class="text-input"
+    placeholder="WhatsApp do amigo"
+    inputmode="tel"
+    [ngModel]="flow.answers().indicacaoWhatsapp"
+    (ngModelChange)="onWhatsappChange($event)"
+  />
+</div>
+
+<button type="button" class="primary-btn mt-5" [disabled]="!podeEnviar()" (click)="continuar()">
+  Indicar amigo
+</button>
+<button type="button" class="ghost-btn mt-2" (click)="continuar()">Agora não</button>

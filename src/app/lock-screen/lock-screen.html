@@ -1,0 +1,16 @@
+<div
+  class="lock-wrap"
+  [class.lock-wrap-exit]="unlocking()"
+  (click)="onUnlock()"
+  role="button"
+  tabindex="0"
+  (keydown)="onKeydown($event)"
+  aria-label="Toque na tela para iniciar a pesquisa"
+>
+  <div class="lock-inner" [class.lock-inner-exit]="unlocking()">
+    <img [src]="logoSrc" alt="Tradição do Boleiro" class="lock-logo" />
+    <div class="lock-hairline"></div>
+    <p class="lock-cta">Toque na tela para desbloquear</p>
+    <p class="lock-sub">e iniciar a pesquisa de satisfação</p>
+  </div>
+</div>
