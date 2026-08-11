@@ -726,6 +726,37 @@ textarea {
 }
 .admin-card-line b { color: var(--text); font-weight: 700; }
 
+.admin-panel-page {
+  width: 100%;
+  max-width: 440px;
+  max-height: 86dvh;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+.admin-logout-btn {
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.admin-logout-btn:hover { color: var(--green-bright); }
+
+.login-erro {
+  color: #e2554c;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: -4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .screen-enter,
   .thanks-circle,

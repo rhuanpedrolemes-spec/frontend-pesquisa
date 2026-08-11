@@ -1,0 +1,49 @@
+<div class="app-shell">
+  <div class="w-full flex flex-col items-center" style="position: relative;">
+    <div class="w-full flex flex-col items-center mb-8">
+      <div class="flex items-center gap-2.5">
+        <div class="logo-badge">
+          <img [src]="logoSrc" alt="Tradição do Boleiro" class="logo-img" />
+        </div>
+        <div class="logo-word-wrap">
+          <span class="logo-word-line1">TRADIÇÃO</span>
+          <span class="logo-word-line2">DO BOLEIRO</span>
+        </div>
+      </div>
+      <div class="hairline"></div>
+      @if (showProgress()) {
+        <div class="w-full mt-6">
+          <div class="progress-track">
+            <div class="progress-fill" [style.width.%]="progressPercent()"></div>
+          </div>
+          <p class="progress-text">Pergunta {{ stepNumber() }} de {{ flow.totalPerguntas() }}</p>
+        </div>
+      }
+    </div>
+
+    <div class="bp-card">
+      @for (k of [flow.animKey()]; track k) {
+        <div class="screen-enter">
+          @switch (flow.stage()) {
+            @case ('referral') {
+              <app-referral-screen />
+            }
+            @case ('thanks') {
+              <app-thanks-screen />
+            }
+            @case ('survey') {
+              <app-survey />
+            }
+            @default {
+              <app-welcome-form />
+            }
+          }
+        </div>
+      }
+    </div>
+
+    @if (flow.stage() === 'lock') {
+      <app-lock-screen (unlocked)="onUnlocked()" />
+    }
+  </div>
+</div>

@@ -13,15 +13,11 @@ export class RespostasService {
     return this.http.post<RespostaSalva>(this.respostasUrl, resposta);
   }
 
-  listarRespostas(pin: string): Observable<RespostaSalva[]> {
-    return this.http.get<RespostaSalva[]>(this.respostasUrl, {
-      headers: { 'x-admin-pin': pin },
-    });
+  listarRespostas(): Observable<RespostaSalva[]> {
+    return this.http.get<RespostaSalva[]>(this.respostasUrl);
   }
 
-  resumo(pin: string): Observable<ResumoRespostas> {
-    return this.http.get<ResumoRespostas>(`${this.respostasUrl}/resumo`, {
-      headers: { 'x-admin-pin': pin },
-    });
+  resumo(): Observable<ResumoRespostas> {
+    return this.http.get<ResumoRespostas>(`${this.respostasUrl}/resumo`);
   }
 }

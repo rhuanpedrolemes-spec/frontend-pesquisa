@@ -1,0 +1,31 @@
+<div class="app-shell">
+  <div class="bp-card">
+    <h1 class="question text-center">Painel Administrativo</h1>
+
+    <div class="flex flex-col gap-3">
+      <input
+        class="text-input"
+        placeholder="Usuário"
+        name="username"
+        [(ngModel)]="username"
+        (keyup.enter)="entrar()"
+      />
+      <input
+        class="text-input"
+        type="password"
+        placeholder="Senha"
+        name="password"
+        [(ngModel)]="password"
+        (keyup.enter)="entrar()"
+      />
+    </div>
+
+    @if (erro()) {
+      <p class="login-erro">Usuário ou senha inválidos</p>
+    }
+
+    <button type="button" class="primary-btn mt-5" [disabled]="carregando()" (click)="entrar()">
+      Entrar
+    </button>
+  </div>
+</div>
