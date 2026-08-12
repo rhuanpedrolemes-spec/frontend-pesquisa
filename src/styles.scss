@@ -198,7 +198,9 @@ textarea {
   transition: all 0.18s ease;
   cursor: pointer;
 }
-.scale-cell:hover { transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) {
+  .scale-cell:hover { transform: translateY(-2px); }
+}
 .scale-bar {
   width: 62%;
   border-radius: 5px;
@@ -219,7 +221,9 @@ textarea {
   cursor: pointer;
   background: none;
 }
-.face-cell:hover { transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) {
+  .face-cell:hover { transform: translateY(-2px); }
+}
 .scale-label {
   font-size: 11px;
   color: var(--text-muted);
@@ -238,10 +242,12 @@ textarea {
   font-weight: 700;
   transition: all 0.18s ease;
 }
-.bool-btn:hover {
-  border-color: var(--green-bright);
-  background: var(--green-soft);
-  color: var(--green-bright);
+@media (hover: hover) and (pointer: fine) {
+  .bool-btn:hover {
+    border-color: var(--green-bright);
+    background: var(--green-soft);
+    color: var(--green-bright);
+  }
 }
 .bool-btn:active { transform: scale(0.97); }
 
@@ -260,7 +266,9 @@ textarea {
   justify-content: space-between;
   transition: all 0.18s ease;
 }
-.choice-btn:hover { border-color: var(--green-bright); }
+@media (hover: hover) and (pointer: fine) {
+  .choice-btn:hover { border-color: var(--green-bright); }
+}
 .choice-btn[data-selected='true'] {
   border-color: var(--green-bright);
   background: var(--green-soft);
@@ -325,7 +333,9 @@ textarea {
   transition: all 0.18s ease;
 }
 .primary-btn:disabled { opacity: 0.4; }
-.primary-btn:not(:disabled):hover { filter: brightness(1.08); }
+@media (hover: hover) and (pointer: fine) {
+  .primary-btn:not(:disabled):hover { filter: brightness(1.08); }
+}
 .primary-btn:not(:disabled):active { transform: scale(0.98); }
 
 .secondary-btn {
@@ -338,7 +348,9 @@ textarea {
   font-weight: 700;
   font-size: 15px;
 }
-.secondary-btn:hover { background: var(--green-soft); }
+@media (hover: hover) and (pointer: fine) {
+  .secondary-btn:hover { background: var(--green-soft); }
+}
 
 .ghost-btn {
   width: 100%;
@@ -350,7 +362,9 @@ textarea {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.ghost-btn:hover { color: var(--text); }
+@media (hover: hover) and (pointer: fine) {
+  .ghost-btn:hover { color: var(--text); }
+}
 
 .reset-btn {
   background: transparent;
@@ -360,7 +374,9 @@ textarea {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.reset-btn:hover { color: var(--green-bright); }
+@media (hover: hover) and (pointer: fine) {
+  .reset-btn:hover { color: var(--green-bright); }
+}
 
 .offer-icon {
   width: 46px;
@@ -561,7 +577,9 @@ textarea {
   font-size: 14px;
   border: none;
 }
-.admin-close:hover { color: var(--text); }
+@media (hover: hover) and (pointer: fine) {
+  .admin-close:hover { color: var(--text); }
+}
 
 .pin-wrap {
   padding: 30px 24px 28px;
@@ -606,7 +624,9 @@ textarea {
   font-size: 18px;
   font-weight: 700;
 }
-.pin-key:hover { background: var(--green-soft); border-color: var(--green-bright); }
+@media (hover: hover) and (pointer: fine) {
+  .pin-key:hover { background: var(--green-soft); border-color: var(--green-bright); }
+}
 .pin-key-del { font-size: 16px; color: var(--text-muted); }
 
 .admin-list-wrap {
@@ -739,7 +759,9 @@ textarea {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.admin-card-delete-btn:hover { color: #ff6b61; }
+@media (hover: hover) and (pointer: fine) {
+  .admin-card-delete-btn:hover { color: #ff6b61; }
+}
 
 .admin-panel-page {
   width: 100%;
@@ -761,7 +783,9 @@ textarea {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.admin-logout-btn:hover { color: var(--green-bright); }
+@media (hover: hover) and (pointer: fine) {
+  .admin-logout-btn:hover { color: var(--green-bright); }
+}
 
 .login-erro {
   color: #e2554c;
