@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,13 +20,13 @@ export class LoginComponent {
   password = '';
 
   readonly carregando = signal(false);
-  readonly erro = signal(false);
+  readonly mensagemErro = signal<string | null>(null);
 
   entrar(): void {
     if (!this.username.trim() || !this.password.trim()) return;
 
     this.carregando.set(true);
-    this.erro.set(false);
+    this.mensagemErro.set(null);
 
     this.auth.login(this.username.trim(), this.password).subscribe({
       next: ({ token }) => {
@@ -33,9 +34,13 @@ export class LoginComponent {
         this.carregando.set(false);
         this.router.navigate(['/admin/painel']);
       },
-      error: () => {
+      error: (erro: HttpErrorResponse) => {
         this.carregando.set(false);
-        this.erro.set(true);
+        this.mensagemErro.set(
+          erro.status === 401
+            ? 'Usuário ou senha inválidos'
+            : 'Não foi possível conectar ao servidor. Tente novamente em alguns instantes.'
+        );
       },
     });
   }

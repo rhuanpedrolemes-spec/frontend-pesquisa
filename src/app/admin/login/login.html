@@ -20,8 +20,8 @@
       />
     </div>
 
-    @if (erro()) {
-      <p class="login-erro">Usuário ou senha inválidos</p>
+    @if (mensagemErro()) {
+      <p class="login-erro">{{ mensagemErro() }}</p>
     }
 
     <button type="button" class="primary-btn mt-5" [disabled]="carregando()" (click)="entrar()">
