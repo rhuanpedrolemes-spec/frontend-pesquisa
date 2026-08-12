@@ -726,6 +726,21 @@ textarea {
 }
 .admin-card-line b { color: var(--text); font-weight: 700; }
 
+.admin-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.admin-card-delete-btn {
+  background: transparent;
+  color: #e2554c;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.admin-card-delete-btn:hover { color: #ff6b61; }
+
 .admin-panel-page {
   width: 100%;
   max-width: 440px;

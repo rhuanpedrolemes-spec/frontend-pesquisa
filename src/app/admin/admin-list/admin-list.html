@@ -82,6 +82,10 @@
               <b>Indicação:</b> {{ r.indicacaoNome }}{{ r.indicacaoWhatsapp ? ' — ' + r.indicacaoWhatsapp : '' }}
             </p>
           }
+
+          <div class="admin-card-actions">
+            <button type="button" class="admin-card-delete-btn" (click)="onExcluir(r._id)">Excluir</button>
+          </div>
         </div>
       }
     </div>

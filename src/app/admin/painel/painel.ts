@@ -24,6 +24,11 @@ export class PainelComponent implements OnInit {
   readonly resumo = signal<ResumoRespostas | null>(null);
 
   ngOnInit(): void {
+    this.carregar();
+  }
+
+  private carregar(): void {
+    this.loading.set(true);
     forkJoin({
       respostas: this.respostasService.listarRespostas(),
       resumo: this.respostasService.resumo(),
@@ -37,6 +42,13 @@ export class PainelComponent implements OnInit {
         this.loading.set(false);
         console.error('Falha ao carregar respostas:', erro);
       },
+    });
+  }
+
+  onExcluir(id: string): void {
+    this.respostasService.excluirResposta(id).subscribe({
+      next: () => this.carregar(),
+      error: (erro) => console.error('Falha ao excluir resposta:', erro),
     });
   }
 

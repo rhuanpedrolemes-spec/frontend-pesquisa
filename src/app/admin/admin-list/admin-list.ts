@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { RespostaSalva, ResumoRespostas } from '../../models/resposta.model';
 import { faceFor } from '../../shared/face-scale.util';
 
@@ -13,8 +13,15 @@ export class AdminListComponent {
   @Input() loading = false;
   @Input() resumo: ResumoRespostas | null = null;
   @Input() respostas: RespostaSalva[] | null = null;
+  @Output() excluirResposta = new EventEmitter<string>();
 
   readonly faceFor = faceFor;
+
+  onExcluir(id: string): void {
+    if (confirm('Excluir esta resposta? Essa ação não pode ser desfeita.')) {
+      this.excluirResposta.emit(id);
+    }
+  }
 
   get mediaAtendimentoFormatada(): string | null {
     const media = this.resumo?.mediaNotaAtendimento;

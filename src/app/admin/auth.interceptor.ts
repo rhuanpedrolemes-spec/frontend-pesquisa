@@ -8,7 +8,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AdminAuthService);
   const router = inject(Router);
 
-  const isChamadaProtegida = req.method === 'GET' && req.url.includes('/api/respostas');
+  const isChamadaProtegida =
+    (req.method === 'GET' || req.method === 'DELETE') && req.url.includes('/api/respostas');
   const token = auth.obterToken();
 
   const requisicao =

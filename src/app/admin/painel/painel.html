@@ -4,6 +4,11 @@
       <span class="admin-title">Respostas dos clientes</span>
       <button type="button" class="admin-logout-btn" (click)="sair()">Sair</button>
     </div>
-    <app-admin-list [loading]="loading()" [resumo]="resumo()" [respostas]="respostas()" />
+    <app-admin-list
+      [loading]="loading()"
+      [resumo]="resumo()"
+      [respostas]="respostas()"
+      (excluirResposta)="onExcluir($event)"
+    />
   </div>
 </div>

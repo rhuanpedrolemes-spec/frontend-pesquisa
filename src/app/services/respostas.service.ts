@@ -20,4 +20,8 @@ export class RespostasService {
   resumo(): Observable<ResumoRespostas> {
     return this.http.get<ResumoRespostas>(`${this.respostasUrl}/resumo`);
   }
+
+  excluirResposta(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.respostasUrl}/${id}`);
+  }
 }
