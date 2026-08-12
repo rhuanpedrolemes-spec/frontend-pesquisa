@@ -330,6 +330,7 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  text-decoration: none;
   transition: all 0.18s ease;
 }
 .primary-btn:disabled { opacity: 0.4; }

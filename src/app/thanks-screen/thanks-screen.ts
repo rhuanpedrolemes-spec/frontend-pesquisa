@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { IconComponent } from '../shared/icon/icon';
+import { GOOGLE_REVIEW_URL } from '../shared/google-review';
 import { SurveyFlowService } from '../survey/survey-flow.service';
 
 @Component({
@@ -12,6 +13,8 @@ import { SurveyFlowService } from '../survey/survey-flow.service';
 })
 export class ThanksScreenComponent {
   private readonly flow = inject(SurveyFlowService);
+
+  readonly googleReviewUrl = GOOGLE_REVIEW_URL;
 
   novaAvaliacao(): void {
     this.flow.reiniciar();

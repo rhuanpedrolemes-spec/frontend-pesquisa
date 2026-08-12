@@ -6,5 +6,16 @@
   </div>
   <h1 class="question text-center mt-6">Obrigado pela sua avaliação!</h1>
   <p class="offer-text text-center">Sua opinião ajuda o Boleiro a melhorar cada vez mais.</p>
+
+  <div class="flex flex-col items-center gap-3 w-full mt-6">
+    <p class="offer-text text-center">
+      Se puder, deixe também uma avaliação pra gente no Google — leva só um minuto!
+    </p>
+    <a class="primary-btn" [href]="googleReviewUrl" target="_blank" rel="noopener noreferrer">
+      Avaliar no Google
+      <app-icon name="arrow-right" [size]="18" />
+    </a>
+  </div>
+
   <button type="button" class="reset-btn mt-8" (click)="novaAvaliacao()">Nova avaliação</button>
 </div>
