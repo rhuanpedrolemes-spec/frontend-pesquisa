@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, signal } from '@angular/core';
-import { LOGO_SRC } from '../shared/logo';
 
 @Component({
   selector: 'app-lock-screen',
@@ -11,7 +10,7 @@ import { LOGO_SRC } from '../shared/logo';
 export class LockScreenComponent {
   @Output() unlocked = new EventEmitter<void>();
 
-  readonly logoSrc = LOGO_SRC;
+  readonly videoSrc = '/video/inicio.mp4';
   readonly unlocking = signal(false);
 
   onUnlock(): void {

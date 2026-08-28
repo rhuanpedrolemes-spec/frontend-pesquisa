@@ -7,10 +7,19 @@
   (keydown)="onKeydown($event)"
   aria-label="Toque na tela para iniciar a pesquisa"
 >
+  <video
+    class="lock-video"
+    [src]="videoSrc"
+    [autoplay]="true"
+    [loop]="true"
+    [muted]="true"
+    playsinline
+    disablepictureinpicture
+  ></video>
+  <div class="lock-video-overlay"></div>
+
   <div class="lock-inner" [class.lock-inner-exit]="unlocking()">
-    <img [src]="logoSrc" alt="Tradição do Boleiro" class="lock-logo" />
-    <div class="lock-hairline"></div>
-    <p class="lock-cta">Toque na tela para desbloquear</p>
+    <p class="lock-cta">Toque na tela para começar</p>
     <p class="lock-sub">e iniciar a pesquisa de satisfação</p>
   </div>
 </div>
