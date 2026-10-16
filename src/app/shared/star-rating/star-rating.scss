@@ -1,0 +1,31 @@
+:host {
+  display: inline-flex;
+}
+
+.stars {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.stars-row {
+  display: inline-flex;
+  white-space: nowrap;
+  gap: 1px;
+}
+
+.stars-empty svg {
+  fill: rgba(255, 255, 255, 0.16);
+}
+
+.stars-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.stars-fill svg {
+  flex: none;
+  fill: #f4b400;
+}

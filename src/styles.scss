@@ -754,6 +754,12 @@ textarea {
   margin-top: 2px;
 }
 .admin-card-line b { color: var(--text); font-weight: 700; }
+.admin-card-barbeiro {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
 
 .admin-card-actions {
   display: flex;

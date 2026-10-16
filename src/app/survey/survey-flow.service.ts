@@ -1,8 +1,10 @@
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
-import { RESPOSTA_VAZIA, Resposta } from '../models/resposta.model';
+import { Barbeiro, RESPOSTA_VAZIA, Resposta } from '../models/resposta.model';
+import { BarbeirosService } from '../services/barbeiros.service';
 import { RespostasService } from '../services/respostas.service';
 
 export type ScreenId =
+  | 'barbeiro'
   | 'atendimento'
   | 'assinante'
   | 'sat_assinatura'
@@ -16,7 +18,7 @@ export type ScreenId =
 export type Stage = 'lock' | 'identificacao' | 'survey' | 'referral' | 'thanks';
 
 export function computeFlow(a: Resposta): ScreenId[] {
-  const flow: ScreenId[] = ['atendimento', 'assinante'];
+  const flow: ScreenId[] = ['barbeiro', 'atendimento', 'assinante'];
 
   if (a.assinante === true) {
     flow.push('sat_assinatura', 'sat_geral', 'comentario');
@@ -49,7 +51,13 @@ export function computeFlow(a: Resposta): ScreenId[] {
 @Injectable({ providedIn: 'root' })
 export class SurveyFlowService {
   private readonly respostasService = inject(RespostasService);
+  private readonly barbeirosService = inject(BarbeirosService);
   private jaSalvou = false;
+
+  readonly barbeiroSelecionado = signal<Barbeiro | null>(null);
+  readonly primeiroNomeBarbeiro = computed(
+    () => this.barbeiroSelecionado()?.nome.split(' ')[0] ?? null
+  );
 
   readonly answers = signal<Resposta>({ ...RESPOSTA_VAZIA });
   readonly stepIndex = signal(0);
@@ -61,6 +69,9 @@ export class SurveyFlowService {
   readonly totalPerguntas = computed(() => this.flow().length);
 
   constructor() {
+    // pré-carrega o ranking enquanto o cliente ainda está na tela inicial
+    this.barbeirosService.carregar();
+
     // ao terminar o fluxo principal, segue para a tela de indicação
     effect(() => {
       if (this.stage() === 'survey' && this.stepIndex() >= this.flow().length) {
@@ -81,8 +92,15 @@ export class SurveyFlowService {
   }
 
   mostrarIdentificacao(): void {
+    // atualiza o ranking (a avaliação do cliente anterior já pode ter mudado as posições)
+    this.barbeirosService.carregar();
     this.animKey.update((k) => k + 1);
     this.stage.set('identificacao');
+  }
+
+  selecionarBarbeiro(barbeiro: Barbeiro): void {
+    this.barbeiroSelecionado.set(barbeiro);
+    this.avancar({ barbeiro: barbeiro._id });
   }
 
   iniciarPesquisa(): void {
@@ -117,6 +135,7 @@ export class SurveyFlowService {
 
   reiniciar(): void {
     this.jaSalvou = false;
+    this.barbeiroSelecionado.set(null);
     this.answers.set({ ...RESPOSTA_VAZIA });
     this.stepIndex.set(0);
     this.animKey.update((k) => k + 1);

@@ -9,6 +9,12 @@
         <span class="admin-summary-num">{{ resumo?.total ?? respostas.length }}</span>
         <span class="admin-summary-label">Respostas</span>
       </div>
+      @if (mediaBarbeiroFormatada) {
+        <div class="admin-summary-item">
+          <span class="admin-summary-num">{{ mediaBarbeiroFormatada }}</span>
+          <span class="admin-summary-label">Média barbeiros</span>
+        </div>
+      }
       @if (mediaAtendimentoFormatada) {
         <div class="admin-summary-item">
           <span class="admin-summary-num">{{ mediaAtendimentoFormatada }}</span>
@@ -65,6 +71,15 @@
             }
           </div>
 
+          @if (r.barbeiro) {
+            <p class="admin-card-line admin-card-barbeiro">
+              <b>Barbeiro:</b> {{ r.barbeiro.nome }}
+              @if (r.notaBarbeiro != null) {
+                <app-star-rating [value]="r.notaBarbeiro" [size]="12" />
+                {{ r.notaBarbeiro }}/5
+              }
+            </p>
+          }
           @if (r.frequenciaCorte) {
             <p class="admin-card-line"><b>Frequência:</b> {{ r.frequenciaCorte }}</p>
           }

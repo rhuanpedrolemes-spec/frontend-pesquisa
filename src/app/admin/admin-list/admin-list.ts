@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { RespostaSalva, ResumoRespostas } from '../../models/resposta.model';
 import { faceFor } from '../../shared/face-scale.util';
+import { formatarMedia } from '../../shared/rating.util';
+import { StarRatingComponent } from '../../shared/star-rating/star-rating';
 
 @Component({
   selector: 'app-admin-list',
   standalone: true,
+  imports: [StarRatingComponent],
   templateUrl: './admin-list.html',
   styleUrl: './admin-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +24,11 @@ export class AdminListComponent {
     if (confirm('Excluir esta resposta? Essa ação não pode ser desfeita.')) {
       this.excluirResposta.emit(id);
     }
+  }
+
+  get mediaBarbeiroFormatada(): string | null {
+    const media = this.resumo?.mediaNotaBarbeiro;
+    return media != null ? formatarMedia(media) : null;
   }
 
   get mediaAtendimentoFormatada(): string | null {

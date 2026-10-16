@@ -1,9 +1,19 @@
 @switch (flow.screenId()) {
+  @case ('barbeiro') {
+    <h1 class="question">Quem atendeu você hoje?</h1>
+    <app-question-barbeiro
+      [selecionadoId]="flow.answers().barbeiro"
+      (selected)="flow.selecionarBarbeiro($event)"
+    />
+  }
+
   @case ('atendimento') {
-    <h1 class="question">Como foi seu atendimento hoje?</h1>
-    <app-question-scale-faces
-      [value]="flow.answers().notaAtendimento"
-      (selected)="flow.avancar({ notaAtendimento: $event })"
+    <h1 class="question">
+      Como foi seu atendimento{{ flow.primeiroNomeBarbeiro() ? ' com o ' + flow.primeiroNomeBarbeiro() : ' hoje' }}?
+    </h1>
+    <app-question-stars
+      [value]="flow.answers().notaBarbeiro"
+      (selected)="flow.avancar({ notaBarbeiro: $event })"
     />
   }
 

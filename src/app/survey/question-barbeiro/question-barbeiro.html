@@ -1,0 +1,31 @@
+@switch (barbeiros.status()) {
+  @case ('carregando') {
+    <p class="admin-empty">Carregando barbeiros...</p>
+  }
+  @case ('erro') {
+    <p class="admin-empty">Não foi possível carregar os barbeiros.</p>
+    <button type="button" class="secondary-btn" (click)="barbeiros.carregar()">Tentar novamente</button>
+  }
+  @default {
+    <div class="barbeiro-grid">
+      @for (b of barbeiros.lista(); track b._id) {
+        <button
+          type="button"
+          class="barbeiro-card"
+          [class.barbeiro-card-on]="b._id === selecionadoId"
+          (click)="onSelect(b)"
+        >
+          <img class="barbeiro-foto" [src]="foto(b)" [alt]="b.nome" loading="eager" />
+          <span class="barbeiro-nome">{{ b.nome }}</span>
+          <span class="barbeiro-rating">
+            @if (b.media !== null) {
+              <span class="barbeiro-media">{{ formatarMedia(b.media) }}</span>
+            }
+            <app-star-rating [value]="b.media" [size]="13" />
+          </span>
+          <span class="barbeiro-total">{{ formatarQuantidade(b.totalAvaliacoes) }}</span>
+        </button>
+      }
+    </div>
+  }
+}

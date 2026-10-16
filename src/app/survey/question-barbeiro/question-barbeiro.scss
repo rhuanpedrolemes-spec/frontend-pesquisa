@@ -1,0 +1,74 @@
+:host {
+  display: block;
+}
+
+.barbeiro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.barbeiro-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 8px 8px 12px;
+  border-radius: 18px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.barbeiro-card:active {
+  transform: scale(0.97);
+}
+
+.barbeiro-card-on {
+  border-color: var(--green-bright);
+  background: var(--green-soft);
+}
+
+.barbeiro-foto {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 12px;
+  background: #0e100c;
+  margin-bottom: 6px;
+}
+
+.barbeiro-nome {
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.barbeiro-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 16px;
+}
+
+.barbeiro-media {
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.barbeiro-total {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .barbeiro-card:hover {
+    border-color: var(--green-bright);
+  }
+}

@@ -1,0 +1,21 @@
+<div>
+  <div class="stars-input">
+    @for (n of estrelas; track n) {
+      <button
+        type="button"
+        class="star-btn"
+        [class.star-btn-on]="value !== null && n <= value"
+        [attr.aria-label]="n + (n === 1 ? ' estrela' : ' estrelas')"
+        (click)="onSelect(n)"
+      >
+        <svg width="46" height="46" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      </button>
+    }
+  </div>
+  <div class="flex justify-between mt-3 px-1">
+    <span class="scale-label">Insatisfeito</span>
+    <span class="scale-label">Satisfeito</span>
+  </div>
+</div>
