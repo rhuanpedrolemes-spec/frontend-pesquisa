@@ -42,9 +42,11 @@
           }
           <div class="admin-card-top">
             <span class="admin-card-date">{{ r.criadoEm ? formatarData(r.criadoEm) : '' }}</span>
-            <span class="admin-card-badge" [attr.data-type]="r.assinante ? 'assinante' : 'novo'">
-              {{ r.assinante ? 'Assinante' : 'Não assinante' }}
-            </span>
+            @if (r.assinante != null) {
+              <span class="admin-card-badge" [attr.data-type]="r.assinante ? 'assinante' : 'novo'">
+                {{ r.assinante ? 'Assinante' : 'Não assinante' }}
+              </span>
+            }
           </div>
 
           <div class="admin-card-scores">

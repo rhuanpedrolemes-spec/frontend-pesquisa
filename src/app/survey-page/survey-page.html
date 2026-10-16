@@ -16,7 +16,7 @@
           <div class="progress-track">
             <div class="progress-fill" [style.width.%]="progressPercent()"></div>
           </div>
-          <p class="progress-text">Pergunta {{ stepNumber() }} de {{ flow.totalPerguntas() }}</p>
+          <p class="progress-text">Pergunta {{ stepNumber() }} de {{ flow.totalPerguntas }}</p>
         </div>
       }
     </div>
@@ -25,9 +25,6 @@
       @for (k of [flow.animKey()]; track k) {
         <div class="screen-enter">
           @switch (flow.stage()) {
-            @case ('referral') {
-              <app-referral-screen />
-            }
             @case ('thanks') {
               <app-thanks-screen />
             }

@@ -3,50 +3,12 @@ import { Barbeiro, RESPOSTA_VAZIA, Resposta } from '../models/resposta.model';
 import { BarbeirosService } from '../services/barbeiros.service';
 import { RespostasService } from '../services/respostas.service';
 
-export type ScreenId =
-  | 'barbeiro'
-  | 'atendimento'
-  | 'assinante'
-  | 'sat_assinatura'
-  | 'sat_geral'
-  | 'comentario'
-  | 'frequencia'
-  | 'objecao'
-  | 'oferta'
-  | 'oferta_confirmacao';
+export type ScreenId = 'barbeiro' | 'atendimento';
 
-export type Stage = 'lock' | 'identificacao' | 'survey' | 'referral' | 'thanks';
+export type Stage = 'lock' | 'identificacao' | 'survey' | 'thanks';
 
-export function computeFlow(a: Resposta): ScreenId[] {
-  const flow: ScreenId[] = ['barbeiro', 'atendimento', 'assinante'];
-
-  if (a.assinante === true) {
-    flow.push('sat_assinatura', 'sat_geral', 'comentario');
-  } else if (a.assinante === false) {
-    flow.push('frequencia');
-
-    if (a.frequenciaCorte === '1 vez') {
-      flow.push('objecao');
-      if (a.objecao === 'Sairia muito caro') {
-        flow.push('oferta');
-      }
-    } else if (
-      a.frequenciaCorte === '2 vezes' ||
-      a.frequenciaCorte === '3 vezes' ||
-      a.frequenciaCorte === '4 vezes ou mais'
-    ) {
-      flow.push('oferta');
-    }
-
-    if (a.interessePlano === 'Sim') {
-      flow.push('oferta_confirmacao');
-    }
-
-    flow.push('sat_geral', 'comentario');
-  }
-
-  return flow;
-}
+/** Perguntas da pesquisa, na ordem: quem atendeu e a nota em estrelas. */
+export const PERGUNTAS: readonly ScreenId[] = ['barbeiro', 'atendimento'];
 
 @Injectable({ providedIn: 'root' })
 export class SurveyFlowService {
@@ -64,19 +26,18 @@ export class SurveyFlowService {
   readonly stage = signal<Stage>('lock');
   readonly animKey = signal(0);
 
-  readonly flow = computed(() => computeFlow(this.answers()));
-  readonly screenId = computed<ScreenId | undefined>(() => this.flow()[this.stepIndex()]);
-  readonly totalPerguntas = computed(() => this.flow().length);
+  readonly screenId = computed<ScreenId | undefined>(() => PERGUNTAS[this.stepIndex()]);
+  readonly totalPerguntas = PERGUNTAS.length;
 
   constructor() {
     // pré-carrega o ranking enquanto o cliente ainda está na tela inicial
     this.barbeirosService.carregar();
 
-    // ao terminar o fluxo principal, segue para a tela de indicação
+    // ao responder a última pergunta, segue para o agradecimento
     effect(() => {
-      if (this.stage() === 'survey' && this.stepIndex() >= this.flow().length) {
+      if (this.stage() === 'survey' && this.stepIndex() >= PERGUNTAS.length) {
         this.animKey.update((k) => k + 1);
-        this.stage.set('referral');
+        this.stage.set('thanks');
       }
     });
 
@@ -112,25 +73,12 @@ export class SurveyFlowService {
     this.answers.update((prev) => ({ ...prev, ...patch }));
   }
 
-  atualizarComentario(comentario: string): void {
-    this.answers.update((prev) => ({ ...prev, comentario }));
-  }
-
-  atualizarIndicacao(patch: Partial<Pick<Resposta, 'indicacaoNome' | 'indicacaoWhatsapp'>>): void {
-    this.answers.update((prev) => ({ ...prev, ...patch }));
-  }
-
   avancar(patch: Partial<Resposta> = {}): void {
     this.answers.update((prev) => ({ ...prev, ...patch }));
     setTimeout(() => {
       this.animKey.update((k) => k + 1);
       this.stepIndex.update((i) => i + 1);
     }, 260);
-  }
-
-  finalizarIndicacao(): void {
-    this.animKey.update((k) => k + 1);
-    this.stage.set('thanks');
   }
 
   reiniciar(): void {
