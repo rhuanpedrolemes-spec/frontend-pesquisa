@@ -93,21 +93,18 @@ textarea {
   color: var(--text);
 }
 
+/* logo livre: sem fundo, sem contorno, só o emblema (PNG com transparência) */
 .logo-badge {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #000;
-  border: 1.5px solid var(--green-bright);
+  width: 72px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 .logo-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .logo-word-wrap {
   display: flex;
@@ -471,7 +468,6 @@ textarea {
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -479,7 +475,9 @@ textarea {
   background: #000;
   overflow: hidden;
   z-index: 50;
-  padding: 24px;
+  /* botão no terço de baixo: o vídeo fica livre no centro da tela */
+  align-items: flex-end;
+  padding: 24px 24px max(64px, 11dvh);
   transition: opacity 0.4s ease;
   border: none;
 }
@@ -513,20 +511,62 @@ textarea {
   opacity: 0;
   transform: scale(0.96);
 }
-.lock-cta {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  text-align: center;
-  letter-spacing: 0.2px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+.lock-cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 64px;
+  padding: 0 38px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green-bright), var(--green));
+  color: #0e120d;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 14px 34px -8px rgba(0, 0, 0, 0.65),
+    0 0 36px rgba(146, 162, 67, 0.45);
+  animation: lock-breathe 2.4s ease-in-out infinite;
 }
+.lock-cta-btn svg {
+  flex: none;
+  animation: lock-tap 2.4s ease-in-out infinite;
+}
+/* anel que se expande a partir do botão, chamando o toque */
+.lock-cta-btn::before,
+.lock-cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid var(--green-bright);
+  opacity: 0;
+  animation: lock-ring 2.4s ease-out infinite;
+}
+.lock-cta-btn::after { animation-delay: 1.2s; }
 .lock-sub {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 16px;
   text-align: center;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+}
+@keyframes lock-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+@keyframes lock-tap {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(3px) rotate(-6deg); }
+}
+@keyframes lock-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.5, 1.9); opacity: 0; }
 }
 
 .screen-enter {
@@ -814,7 +854,11 @@ textarea {
 @media (prefers-reduced-motion: reduce) {
   .screen-enter,
   .thanks-circle,
-  .thanks-ring::before {
+  .thanks-ring::before,
+  .lock-cta-btn,
+  .lock-cta-btn svg,
+  .lock-cta-btn::before,
+  .lock-cta-btn::after {
     animation: none !important;
   }
 }

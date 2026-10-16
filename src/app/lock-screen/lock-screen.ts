@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output, signal } from
 export class LockScreenComponent {
   @Output() unlocked = new EventEmitter<void>();
 
-  readonly videoSrc = '/video/inicio.mp4';
+  readonly videoSrc = '/video/inicio-v2.mp4';
   readonly unlocking = signal(false);
 
   onUnlock(): void {
