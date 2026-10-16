@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:3000',
+  // Vazio: em `ng serve` as chamadas /api passam pelo proxy (proxy.conf.json) até o backend.
+  apiBaseUrl: '',
 };

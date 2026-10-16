@@ -92,7 +92,8 @@
               "buildTarget": "frontend-pesquisa:build:production"
             },
             "development": {
-              "buildTarget": "frontend-pesquisa:build:development"
+              "buildTarget": "frontend-pesquisa:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

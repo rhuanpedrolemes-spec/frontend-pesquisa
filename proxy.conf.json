@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://backend-pesquisa.onrender.com",
+    "secure": true,
+    "changeOrigin": true,
+    "headers": {
+      "Origin": "https://frontend-pesquisa.vercel.app"
+    }
+  }
+}
