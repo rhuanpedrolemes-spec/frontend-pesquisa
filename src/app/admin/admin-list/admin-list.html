@@ -15,6 +15,12 @@
           <span class="admin-summary-label">Média barbeiros</span>
         </div>
       }
+      @if (mediaBarbeariaFormatada) {
+        <div class="admin-summary-item">
+          <span class="admin-summary-num">{{ mediaBarbeariaFormatada }}</span>
+          <span class="admin-summary-label">Média barbearia</span>
+        </div>
+      }
       @if (mediaAtendimentoFormatada) {
         <div class="admin-summary-item">
           <span class="admin-summary-num">{{ mediaAtendimentoFormatada }}</span>
@@ -81,6 +87,16 @@
                 {{ r.notaBarbeiro }}/5
               }
             </p>
+          }
+          @if (r.notaBarbearia != null) {
+            <p class="admin-card-line admin-card-barbeiro">
+              <b>Barbearia:</b>
+              <app-star-rating [value]="r.notaBarbearia" [size]="12" />
+              {{ r.notaBarbearia }}/5
+            </p>
+          }
+          @if (r.sugestaoMelhoria) {
+            <p class="admin-card-line"><b>O que melhorar:</b> {{ r.sugestaoMelhoria }}</p>
           }
           @if (r.frequenciaCorte) {
             <p class="admin-card-line"><b>Frequência:</b> {{ r.frequenciaCorte }}</p>

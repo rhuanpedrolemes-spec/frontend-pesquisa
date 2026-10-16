@@ -1,0 +1,15 @@
+<div class="barbearia-card">
+  <img class="barbearia-foto" [src]="foto" alt="Fachada da Tradição do Boleiro" loading="eager" />
+  <span class="barbearia-nome">Tradição do Boleiro</span>
+  @if (barbearia.avaliacao(); as a) {
+    <span class="barbearia-rating">
+      @if (a.media !== null) {
+        <span class="barbearia-media">{{ formatarMedia(a.media) }}</span>
+      }
+      <app-star-rating [value]="a.media" [size]="14" />
+    </span>
+    <span class="barbearia-total">{{ formatarQuantidade(a.totalAvaliacoes) }}</span>
+  }
+</div>
+
+<app-question-stars [value]="value" (selected)="selected.emit($event)" />

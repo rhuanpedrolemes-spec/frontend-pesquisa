@@ -31,6 +31,11 @@ export class AdminListComponent {
     return media != null ? formatarMedia(media) : null;
   }
 
+  get mediaBarbeariaFormatada(): string | null {
+    const media = this.resumo?.mediaNotaBarbearia;
+    return media != null ? formatarMedia(media) : null;
+  }
+
   get mediaAtendimentoFormatada(): string | null {
     const media = this.resumo?.mediaNotaAtendimento;
     return media != null ? media.toFixed(1) : null;

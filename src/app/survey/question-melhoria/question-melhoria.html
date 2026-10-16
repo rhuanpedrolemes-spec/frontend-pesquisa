@@ -1,0 +1,13 @@
+<textarea
+  class="text-input melhoria-input"
+  rows="5"
+  placeholder="Escreva aqui sua sugestão (opcional)"
+  [attr.maxlength]="limite"
+  [value]="texto()"
+  (input)="onInput($event)"
+></textarea>
+
+<button type="button" class="primary-btn mt-5" (click)="enviar()">
+  {{ texto().trim() ? 'Enviar' : 'Pular' }}
+  <app-icon name="arrow-right" [size]="18" />
+</button>

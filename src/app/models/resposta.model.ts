@@ -15,6 +15,16 @@ export interface Resposta {
   barbeiro: string | null;
   /** Estrelas de 1 a 5 dadas ao barbeiro. */
   notaBarbeiro: number | null;
+  /** Estrelas de 1 a 5 dadas à barbearia. */
+  notaBarbearia: number | null;
+  /** O que o cliente acha que a barbearia precisa melhorar (opcional). */
+  sugestaoMelhoria: string;
+}
+
+/** Avaliação geral da barbearia (média das estrelas de todas as respostas). */
+export interface AvaliacaoBarbearia {
+  totalAvaliacoes: number;
+  media: number | null;
 }
 
 // --- Legado: respostas antigas (questionário anterior) ainda aparecem no painel ---
@@ -50,6 +60,7 @@ export interface ResumoRespostas {
   total: number;
   mediaNotaAtendimento: number | null;
   mediaNotaBarbeiro: number | null;
+  mediaNotaBarbearia: number | null;
   mediaSatisfacaoGeral: number | null;
 }
 
@@ -58,4 +69,6 @@ export const RESPOSTA_VAZIA: Resposta = {
   clienteWhatsapp: '',
   barbeiro: null,
   notaBarbeiro: null,
+  notaBarbearia: null,
+  sugestaoMelhoria: '',
 };

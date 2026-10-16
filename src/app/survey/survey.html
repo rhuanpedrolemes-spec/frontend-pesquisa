@@ -16,4 +16,20 @@
       (selected)="flow.avancar({ notaBarbeiro: $event })"
     />
   }
+
+  @case ('barbearia') {
+    <h1 class="question">Que nota você daria para a barbearia?</h1>
+    <app-question-barbearia
+      [value]="flow.answers().notaBarbearia"
+      (selected)="flow.avancar({ notaBarbearia: $event })"
+    />
+  }
+
+  @case ('melhoria') {
+    <h1 class="question">O que a gente precisa melhorar?</h1>
+    <app-question-melhoria
+      [value]="flow.answers().sugestaoMelhoria"
+      (enviado)="flow.avancar({ sugestaoMelhoria: $event })"
+    />
+  }
 }

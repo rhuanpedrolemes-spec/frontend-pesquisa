@@ -1,19 +1,24 @@
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { Barbeiro, RESPOSTA_VAZIA, Resposta } from '../models/resposta.model';
+import { BarbeariaService } from '../services/barbearia.service';
 import { BarbeirosService } from '../services/barbeiros.service';
 import { RespostasService } from '../services/respostas.service';
 
-export type ScreenId = 'barbeiro' | 'atendimento';
+export type ScreenId = 'barbeiro' | 'atendimento' | 'barbearia' | 'melhoria';
 
 export type Stage = 'lock' | 'identificacao' | 'survey' | 'thanks';
 
-/** Perguntas da pesquisa, na ordem: quem atendeu e a nota em estrelas. */
-export const PERGUNTAS: readonly ScreenId[] = ['barbeiro', 'atendimento'];
+/**
+ * Perguntas da pesquisa, na ordem: quem atendeu, estrelas do barbeiro,
+ * estrelas da barbearia e o que precisa melhorar (texto opcional).
+ */
+export const PERGUNTAS: readonly ScreenId[] = ['barbeiro', 'atendimento', 'barbearia', 'melhoria'];
 
 @Injectable({ providedIn: 'root' })
 export class SurveyFlowService {
   private readonly respostasService = inject(RespostasService);
   private readonly barbeirosService = inject(BarbeirosService);
+  private readonly barbeariaService = inject(BarbeariaService);
   private jaSalvou = false;
 
   readonly barbeiroSelecionado = signal<Barbeiro | null>(null);
@@ -32,6 +37,7 @@ export class SurveyFlowService {
   constructor() {
     // pré-carrega o ranking enquanto o cliente ainda está na tela inicial
     this.barbeirosService.carregar();
+    this.barbeariaService.carregar();
 
     // ao responder a última pergunta, segue para o agradecimento
     effect(() => {
@@ -55,6 +61,7 @@ export class SurveyFlowService {
   mostrarIdentificacao(): void {
     // atualiza o ranking (a avaliação do cliente anterior já pode ter mudado as posições)
     this.barbeirosService.carregar();
+    this.barbeariaService.carregar();
     this.animKey.update((k) => k + 1);
     this.stage.set('identificacao');
   }
