@@ -15,7 +15,7 @@
 }
 
 .stars-empty svg {
-  fill: rgba(23, 26, 18, 0.14);
+  fill: var(--star-off);
 }
 
 .stars-fill {

@@ -19,7 +19,7 @@
 }
 
 .star-btn svg {
-  fill: rgba(23, 26, 18, 0.13);
+  fill: var(--star-off);
   transition: fill 0.18s ease, transform 0.18s ease;
 }
 

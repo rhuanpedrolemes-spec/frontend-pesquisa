@@ -1,7 +1,27 @@
-<div class="app-shell">
+<div class="app-shell" [class.app-shell-nfc]="flow.stage() === 'thanks'">
+  @if (flow.stage() === 'thanks') {
+    <!-- Etiqueta NFC fica no topo do tablet: o aviso fica colado na borda de cima da tela -->
+    <div class="nfc-top" role="note">
+      <svg class="nfc-top-icon" width="46" height="46" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="6" y="9" width="20" height="34" rx="5" />
+        <path d="M14 14h4" />
+        <circle cx="16" cy="38" r="1.2" fill="currentColor" stroke="none" />
+        <path class="nfc-wave nfc-wave-1" d="M32 20a9.5 9.5 0 0 1 0 12" />
+        <path class="nfc-wave nfc-wave-2" d="M37.5 15a17 17 0 0 1 0 22" />
+        <path class="nfc-wave nfc-wave-3" d="M43 10a24.5 24.5 0 0 1 0 32" />
+      </svg>
+      <span class="nfc-top-text">
+        <strong>Aproxime o celular aqui</strong>
+        <small>para avaliar no Google</small>
+      </span>
+      <svg class="nfc-top-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 15l6-6 6 6" />
+      </svg>
+    </div>
+  }
   <div class="w-full flex flex-col items-center" style="position: relative;">
     <div class="w-full flex flex-col items-center mb-8">
-      <div class="flex items-center gap-2.5">
+      <div class="flex items-center gap-2.5 brand-aura">
         <div class="logo-badge">
           <img [src]="logoSrc" alt="Tradição do Boleiro" class="logo-img" />
         </div>
