@@ -11,6 +11,7 @@ export class LockScreenComponent {
   @Output() unlocked = new EventEmitter<void>();
 
   readonly videoSrc = '/video/inicio-v2.mp4';
+  readonly barberPointUrl = 'https://barberpoint.app.br/c/boleiro';
   readonly unlocking = signal(false);
 
   onUnlock(): void {

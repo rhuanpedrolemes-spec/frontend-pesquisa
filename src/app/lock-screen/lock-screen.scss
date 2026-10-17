@@ -1,3 +1,36 @@
 :host {
   display: contents;
 }
+
+.lock-points-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 26px;
+  margin-top: 28px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.lock-points-btn svg {
+  flex: none;
+  color: #e3edb8;
+}
+
+.lock-points-btn:active {
+  transform: scale(0.97);
+  background: rgba(0, 0, 0, 0.5);
+}
