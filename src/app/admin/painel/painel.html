@@ -3,7 +3,12 @@
     <div class="admin-panel-header">
       <span class="admin-title">Respostas dos clientes</span>
       @if (logado()) {
-        <button type="button" class="admin-logout-btn" (click)="sair()">Sair</button>
+        <span class="flex items-center gap-3">
+          @if (respostas()?.length) {
+            <button type="button" class="admin-card-delete-btn" (click)="onZerar()">Zerar todas</button>
+          }
+          <button type="button" class="admin-logout-btn" (click)="sair()">Sair</button>
+        </span>
       } @else {
         <button type="button" class="admin-logout-btn" (click)="entrar()">Entrar para excluir</button>
       }

@@ -24,4 +24,9 @@ export class RespostasService {
   excluirResposta(id: string): Observable<void> {
     return this.http.delete<void>(`${this.respostasUrl}/${id}`);
   }
+
+  /** Apaga TODAS as respostas. Exige login de administrador. */
+  zerarRespostas(): Observable<{ apagadas: number }> {
+    return this.http.delete<{ apagadas: number }>(this.respostasUrl);
+  }
 }
