@@ -22,6 +22,8 @@ export class PainelComponent implements OnInit {
   readonly loading = signal(true);
   readonly respostas = signal<RespostaSalva[] | null>(null);
   readonly resumo = signal<ResumoRespostas | null>(null);
+  /** Ver as respostas é livre; só quem fez login pode excluir. */
+  readonly logado = signal(this.auth.estaAutenticado());
 
   ngOnInit(): void {
     this.carregar();
@@ -52,8 +54,12 @@ export class PainelComponent implements OnInit {
     });
   }
 
+  entrar(): void {
+    this.router.navigate(['/admin/login']);
+  }
+
   sair(): void {
     this.auth.limparToken();
-    this.router.navigate(['/admin']);
+    this.logado.set(false);
   }
 }

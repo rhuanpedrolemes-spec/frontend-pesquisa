@@ -16,6 +16,8 @@ export class AdminListComponent {
   @Input() loading = false;
   @Input() resumo: ResumoRespostas | null = null;
   @Input() respostas: RespostaSalva[] | null = null;
+  /** O botão Excluir só aparece para quem fez login. */
+  @Input() podeExcluir = false;
   @Output() excluirResposta = new EventEmitter<string>();
 
   readonly faceFor = faceFor;

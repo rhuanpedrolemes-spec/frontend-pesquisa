@@ -21,7 +21,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((erro: HttpErrorResponse) => {
       if (isChamadaProtegida && erro.status === 401) {
         auth.limparToken();
-        router.navigate(['/admin']);
+        router.navigate(['/admin/login']);
       }
       return throwError(() => erro);
     })

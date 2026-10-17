@@ -2,10 +2,15 @@
   <div class="admin-panel-page">
     <div class="admin-panel-header">
       <span class="admin-title">Respostas dos clientes</span>
-      <button type="button" class="admin-logout-btn" (click)="sair()">Sair</button>
+      @if (logado()) {
+        <button type="button" class="admin-logout-btn" (click)="sair()">Sair</button>
+      } @else {
+        <button type="button" class="admin-logout-btn" (click)="entrar()">Entrar para excluir</button>
+      }
     </div>
     <app-admin-list
       [loading]="loading()"
+      [podeExcluir]="logado()"
       [resumo]="resumo()"
       [respostas]="respostas()"
       (excluirResposta)="onExcluir($event)"
